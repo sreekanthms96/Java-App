@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: attendance-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: attendance-app
+  template:
+    metadata:
+      labels:
+        app: attendance-app
+    spec:
+      containers:
+        - name: app
+          image: yourdockerhub/attendance-app:latest
+          env:
+            - name: DB_HOST
+              value: mysql
+            - name: DB_USER
+              value: root
+            - name: DB_PASS
+              value: yourpassword
+            - name: DB_NAME
+              value: attendance
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: attendance-app-service
+spec:
+  selector:
+    app: attendance-app
+  ports:
+    - port: 80
+      targetPort: 8080
+  type: LoadBalancer
