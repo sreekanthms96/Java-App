@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: yourdockerhub/attendance-app:latest
+          image: image: kubernetestestlearn.azurecr.io/attendance-app:latest
           env:
             - name: DB_HOST
               value: mysql
